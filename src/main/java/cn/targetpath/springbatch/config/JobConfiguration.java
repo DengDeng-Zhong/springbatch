@@ -20,20 +20,25 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2020/8/29 0:05
  * @Version V1.0
  */
-@Configuration
-@EnableBatchProcessing
+//@Configuration
+//@EnableBatchProcessing
 public class JobConfiguration {
 
-    // 注入创建任务对象的对象
+    /**
+     * 注入创建任务对象的对象
+      */
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
-    // 创建的任务由step决定
-    // 注入创建Step对象的对象
+    /** 创建的任务由step决定
+    * 注入创建Step对象的对象
+     */
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-    //创建任务对象
+    /**
+     * 创建任务对象
+     */
     @Bean
     public Job helloworld(){
         return jobBuilderFactory.get("helloworld")
