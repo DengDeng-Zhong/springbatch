@@ -6,8 +6,7 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.job.builder.FlowBuilder;
-import org.springframework.batch.core.job.flow.Flow;
+import org.springframework.batch.core.job.flow.JobExecutionDecider;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -16,76 +15,69 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 决策器
+ *
  * @author DengBo_Zhong
- * @Date 2020/9/2 22:57
+ * @Date 2020/9/3 22:13
  * @Version V1.0
  */
-//@Configuration
-//@EnableBatchProcessing
-public class FlowDemoOne {
+@Configuration
+@EnableBatchProcessing
+public class DeciderDemo {
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-    @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-
-    /**
-     * 创建Job对象
-     * @return
-     */
     @Bean
-    public Job flowDemoJob(){
-        return jobBuilderFactory.get("flowDemoJob")
-                .start(folwDemoFlow())
-                .next(flowDemoStep2())
+    public Job deciderDemoJob(){
+        return jobBuilderFactory.get("deciderDemoJob")
+                .start(deciderDemoStep1())
+                .next(myDecider())
+                .from(myDecider()).on("even").to(deciderDemoStep2())
+                .from(myDecider()).on("odd").to(deciderDemoStep3())
+                .from(deciderDemoStep3()).on("*").to(myDecider())
                 .end()
                 .build();
     }
 
-    /**
-     * 创建Flow对象,指明Flow对象包含哪些Step
-     * @return
-     */
     @Bean
-    public Flow folwDemoFlow() {
-        return new FlowBuilder<Flow>("flowDemoFlow")
-                .start(flowDemoStep3())
-                .next(flowDemoStep1())
-                .build();
+    public JobExecutionDecider myDecider(){
+        return new MyDecider();
     }
 
     @Bean
-    public Step flowDemoStep3(){
-        return stepBuilderFactory.get("flowDemoStep3")
+    public Step deciderDemoStep3(){
+        return stepBuilderFactory.get("deciderDemoStep3")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("flowDemoStep3");
+                        System.out.println("odd");
                         return RepeatStatus.FINISHED;
                     }
                 }).build();
     }
 
     @Bean
-    public Step flowDemoStep2(){
-        return stepBuilderFactory.get("flowDemoStep2")
+    public Step deciderDemoStep2(){
+        return stepBuilderFactory.get("deciderDemoStep2")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("flowDemoStep2");
+                        System.out.println("even");
                         return RepeatStatus.FINISHED;
                     }
                 }).build();
     }
 
     @Bean
-    public Step flowDemoStep1(){
-        return stepBuilderFactory.get("flowDemoStep1")
+    public Step deciderDemoStep1(){
+        return stepBuilderFactory.get("deciderDemoStep1")
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("flowDemoStep1");
+                        System.out.println("deciderDemoStep1");
                         return RepeatStatus.FINISHED;
                     }
                 }).build();
