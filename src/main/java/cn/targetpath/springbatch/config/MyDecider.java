@@ -11,7 +11,7 @@ import org.springframework.batch.core.job.flow.JobExecutionDecider;
  * @Version V1.0
  */
 public class MyDecider implements JobExecutionDecider {
-    private int count = 0;
+    private int count = 1;
     @Override
     public FlowExecutionStatus decide(JobExecution jobExecution, StepExecution stepExecution) {
         count++;
