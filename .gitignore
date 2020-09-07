@@ -38,3 +38,5 @@ build/
 !/springbatch.iml
 !/.idea/
 !/.mvn/
+!/.idea/
+!/.mvn/
