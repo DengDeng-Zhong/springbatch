@@ -16,12 +16,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * 父Job
- *
+ * 启动须知:需要在application.properties中配置启动 spring.batch.job.names=parentJob
  * @author DengBo_Zhong
  * @Date 2020/9/4 22:48
  * @Version V1.0
  */
-@Configuration
+//@Configuration
 public class NestedDemo {
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
