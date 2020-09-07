@@ -36,7 +36,3 @@ build/
 !/mvnw
 !/mvnw.cmd
 !/springbatch.iml
-!/.idea/
-!/.mvn/
-!/.idea/
-!/.mvn/
