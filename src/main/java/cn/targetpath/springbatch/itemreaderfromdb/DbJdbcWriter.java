@@ -1,4 +1,4 @@
-package cn.targetpath.springbatch.itemReaderFromDB;
+package cn.targetpath.springbatch.itemreaderfromdb;
 
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;

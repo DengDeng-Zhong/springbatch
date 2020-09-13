@@ -1,11 +1,10 @@
-package cn.targetpath.springbatch.itemReaderFromDB;
+package cn.targetpath.springbatch.itemreaderfromdb;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.Order;
@@ -46,7 +45,7 @@ public class ItemReaderDemo {
 
     @Bean
     public Job itemReaderDemoJob(){
-        return jobBuilderFactory.get("itemReaderDemoJob3")
+        return jobBuilderFactory.get("itemReaderDemoJob4")
                 .start(itemReaderDemoStep())
                 .build();
     }

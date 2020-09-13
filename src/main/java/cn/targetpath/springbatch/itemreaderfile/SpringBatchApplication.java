@@ -1,15 +1,18 @@
-package cn.targetpath.springbatch.itemReaderFromDB;
+package cn.targetpath.springbatch.itemreaderfile;
 
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-@EnableBatchProcessing
-public class SpringbatchApplication {
+/**
+ * @author DengBo_Zhong
+ */
+//@SpringBootApplication
+//@EnableBatchProcessing
+public class SpringBatchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbatchApplication.class, args);
+        SpringApplication.run(SpringBatchApplication.class, args);
     }
 
 }

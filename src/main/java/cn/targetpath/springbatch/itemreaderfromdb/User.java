@@ -1,4 +1,4 @@
-package cn.targetpath.springbatch.itemReaderFromDB;
+package cn.targetpath.springbatch.itemreaderfromdb;
 
 /**
  * 用户实体
